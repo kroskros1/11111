@@ -4,10 +4,12 @@ from bot.handlers import setup_handlers
 from bot.config import TOKEN, PORT
 
 def main():
-    updater = Updater(TOKEN, use_context=True)
+    # Видаліть use_context=True
+    updater = Updater(TOKEN)
     dp = updater.dispatcher
+
     setup_handlers(dp)
-    
+
     if 'RENDER' in os.environ:
         updater.start_webhook(
             listen="0.0.0.0",
@@ -17,6 +19,7 @@ def main():
         )
     else:
         updater.start_polling()
+
     updater.idle()
 
 if __name__ == '__main__':
